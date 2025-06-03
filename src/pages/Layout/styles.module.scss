@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  width: 100%;
+  margin-top: 72px;
+}
+
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: 30px;
+  min-height: calc(100% - 72px - 40px);
+
+  @media (max-width: 1280px) {
+    max-width: 1024px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-inline: 4vw;
+  }
+}
