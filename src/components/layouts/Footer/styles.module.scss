@@ -1,0 +1,25 @@
+.container {
+  background: var(--color-primary);
+  height: 56px;
+  width: 100%;
+}
+
+.content {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftPart {
+  display: flex;
+  column-gap: 10px;
+}
+
+.rightPart {
+  font-size: var(--font-size-s);
+  font-weight: 500;
+  color: #FFFFFF;
+}

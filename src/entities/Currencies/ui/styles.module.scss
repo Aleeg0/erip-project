@@ -1,0 +1,128 @@
+/* Currencies DateInput */
+.InputBlock {
+  &_content {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_dateInput {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    &__label {
+      margin-bottom: 10px;
+
+      p {
+        font-size: var(--font-size-l);
+      }
+    }
+
+    &__picker {
+      width: 130px;
+    }
+  }
+
+  &_submitButton {
+    width: 100%;
+  }
+
+  @media (max-width: 1024px) {
+    &_content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &_dateInput {
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0;
+
+      &__label {
+        margin: 0 16px 0 0;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &_dateInput {
+      &__label {
+        p {
+          font-size: var(--font-size-m);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    &_content {
+      align-items: flex-end;
+    }
+
+    &_dateInput {
+      flex-direction: column;
+      justify-content: center;
+
+      &__label {
+        margin: 0 0 10px;
+      }
+    }
+  }
+}
+
+/* Currencies Table */
+.Table {
+  &_container {
+    position: relative;
+  }
+
+  &_header {
+    width: 100%;
+    padding: 16px;
+    border-bottom: 1px solid #D9D9D9;
+
+    h1 {
+      text-align: center;
+      font-size: var(--font-size-h1);
+      font-weight: bold;
+    }
+  }
+
+  &_content{
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 10px 10px;
+    background: #fafafa;
+  }
+
+  &_flagIcon {
+    height: 16px;
+    width: 24px;
+  }
+
+  @media (max-width: 768px) {
+    &_header {
+      padding-block: 12px;
+
+      h1 {
+        text-align: left;
+        font-size: var(--font-size-h2);
+      }
+    }
+
+    &_flagIcon {
+      height: 12px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    &_header {
+      h1 {
+        font-size: var(--font-size-h3);
+      }
+    }
+  }
+}
