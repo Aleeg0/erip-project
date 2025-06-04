@@ -1,0 +1,60 @@
+.InputBlock {
+  &_content {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 20px;
+
+    &__picker {
+      margin-bottom: 10px;
+    }
+
+    &__selector {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 1280px) {
+    &_content {
+      padding: 16px 20px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    &_inputs {
+      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &__selector, &__picker {
+        width: 320px;
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    &_inputs {
+      flex-direction: column;
+      justify-content: flex-start;
+
+      &__selector, &__picker {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.RangePicker {
+  &_mobile {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+  }
+}

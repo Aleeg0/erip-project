@@ -32,6 +32,14 @@
   }
 }
 
+.ant-select-dropdown {
+  .ant-select-item-option-content {
+    padding-block: 5px;
+    white-space: unset;
+    text-overflow: unset;
+  }
+}
+
 @media (max-width: 768px) {
   .ant-btn {
     font-size: var(--font-size-s);

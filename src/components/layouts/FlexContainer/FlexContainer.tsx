@@ -1,9 +1,13 @@
-import {CurrenciesTable, CurrenciesInputBlock} from "@/entities/Currencies/ui";
-import styles from '@/components/layouts/FlexContainer/styles.module.scss';
+import styles from "@/components/layouts/FlexContainer/styles.module.scss";
 import {cn} from "@/shared/utils";
+import type {FC, ReactNode} from "react";
 
-const HomePage = () => {
+type Props = {
+  mainComponent: ReactNode;
+  sideComponent: ReactNode;
+};
 
+const FlexContainer: FC<Props> = ({mainComponent, sideComponent}) => {
   return (
     <main className={styles.root}>
       <div className={styles.content}>
@@ -11,17 +15,17 @@ const HomePage = () => {
           styles.currenciesDateInput,
           "UiContainer",
         )}>
-          <CurrenciesInputBlock/>
+          {sideComponent}
         </div>
         <div className={cn(
           styles.currenciesTable,
           "UiContainer",
         )}>
-          <CurrenciesTable/>
+          {mainComponent}
         </div>
       </div>
     </main>
   );
 };
 
-export default HomePage;
+export default FlexContainer;

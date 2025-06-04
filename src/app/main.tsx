@@ -7,11 +7,13 @@ import {ConfigProvider} from "antd";
 import ruRU from 'antd/locale/ru_RU';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import {Provider} from "react-redux";
 import {store} from "@/shared/redux";
 
 dayjs.locale('ru');
+dayjs.extend(customParseFormat);
 dayjs.extend(localizedFormat);
 
 createRoot(document.getElementById('root')!).render(
@@ -29,8 +31,6 @@ createRoot(document.getElementById('root')!).render(
           fontSizeHeading3: 24,
           fontSizeHeading4: 20,
           borderRadius: 10,
-          boxShadow: "none",
-          boxShadowSecondary: "none",
           wireframe: false,
           sizeStep: 4
         }
