@@ -4,7 +4,7 @@ import {responseTransformer} from "@/entities/Currencies/lib/responseTransformer
 
 const currenciesApi = api.injectEndpoints({
   endpoints: (create) => ({
-    getCurrencies: create.query<CurrencyTableData[], string>({
+    getCurrenciesByDate: create.query<CurrencyTableData[], string>({
       query: (date) => ({
         url: '/rates',
         params: {

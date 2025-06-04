@@ -44,7 +44,7 @@ const Table = () => {
   const date = dayjs(useAppSelector(currenciesSlice.selectors.selectDate));
   const dateString = date.diff(today, 'day') === 0 ? "сегодня" : date.format("L");
 
-  const {data, isLoading} = currenciesApi.useGetCurrenciesQuery(date.format('YYYY-MM-DD'));
+  const {data, isLoading} = currenciesApi.useGetCurrenciesByDateQuery(date.format('YYYY-MM-DD'));
 
   return (
     <div className={styles.Table_container}>
