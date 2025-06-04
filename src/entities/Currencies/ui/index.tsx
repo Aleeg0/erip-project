@@ -1,2 +1,2 @@
-export {default as CurrenciesInputBlock} from './InputBlock.tsx';
-export {default as CurrenciesTable} from './Table.tsx';
+export {default as CurrenciesInputBlock} from './InputBlock';
+export {default as CurrenciesTable} from './Table';
