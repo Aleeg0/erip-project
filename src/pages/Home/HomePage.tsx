@@ -1,26 +1,13 @@
 import {CurrenciesTable, CurrenciesInputBlock} from "@/entities/Currencies/ui";
-import styles from '@/components/layouts/FlexContainer/styles.module.scss';
-import {cn} from "@/shared/utils";
+import {FlexContainer} from "@/components/layouts";
 
 const HomePage = () => {
 
   return (
-    <main className={styles.root}>
-      <div className={styles.content}>
-        <div className={cn(
-          styles.currenciesDateInput,
-          "UiContainer",
-        )}>
-          <CurrenciesInputBlock/>
-        </div>
-        <div className={cn(
-          styles.currenciesTable,
-          "UiContainer",
-        )}>
-          <CurrenciesTable/>
-        </div>
-      </div>
-    </main>
+    <FlexContainer
+      mainComponent={<CurrenciesTable/>}
+      sideComponent={<CurrenciesInputBlock/>}
+    />
   );
 };
 
