@@ -1,4 +1,9 @@
-export const currencyCountryMap: Record<string, string> = {
+export const getCountryFlagPath = (currencyCode: string): string => {
+  const code = currencyCountryMap[currencyCode];
+  return code ? `https://flagcdn.com/${code}.svg` : "";
+};
+
+const currencyCountryMap: Record<string, string> = {
   AED: "ae",
   AMD: "am",
   AUD: "au",
