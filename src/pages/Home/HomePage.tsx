@@ -1,5 +1,5 @@
 import {CurrenciesTable, CurrenciesInputBlock} from "@/entities/Currencies/ui";
-import styles from './styles.module.scss';
+import styles from '@/components/layouts/FlexContainer/styles.module.scss';
 import {cn} from "@/shared/utils";
 
 const HomePage = () => {
