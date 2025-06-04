@@ -1,7 +1,3 @@
-import dayjs from "dayjs";
-
-export const today = dayjs();
-
 export const currencyCountryMap: Record<string, string> = {
   AED: "ae",
   AMD: "am",

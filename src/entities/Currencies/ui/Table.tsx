@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import {useAppSelector} from "@/shared/redux";
 import type {CurrencyTableData} from "../model/types.ts";
 import {currenciesApi, currenciesSlice} from "../model";
-import {today} from "../lib/const.ts";
+import {today} from "@/shared/const.ts";
 import {getCountryFlagPath} from "../lib/getCountryFlagPath.ts";
 import styles from './styles.module.scss';
 
