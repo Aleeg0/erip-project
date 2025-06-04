@@ -1,10 +1,10 @@
 import {api} from "@/shared/redux/api";
-import type {CurrencyTableData} from "./types";
-import {responseTransformer} from "@/entities/Currencies/lib/responseTransformer.ts";
+import type {CurrencyByDate} from "./types";
+import {transformCurrenciesByDateResponse} from "./lib.ts";
 
 const currenciesApi = api.injectEndpoints({
   endpoints: (create) => ({
-    getCurrenciesByDate: create.query<CurrencyTableData[], string>({
+    getCurrenciesByDate: create.query<CurrencyByDate[], string>({
       query: (date) => ({
         url: '/rates',
         params: {
@@ -12,11 +12,11 @@ const currenciesApi = api.injectEndpoints({
           ondate: date,
         }
       }),
-      transformResponse: responseTransformer
-
+      transformResponse: transformCurrenciesByDateResponse
     })
   }),
   overrideExisting: true,
 });
 
+export const {useGetCurrenciesByDateQuery} = currenciesApi;
 export default currenciesApi;
