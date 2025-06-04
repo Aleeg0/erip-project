@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import {useAppSelector} from "@/shared/redux";
 import type {CurrencyTableData} from "../model/types.ts";
 import {currenciesApi, currenciesSlice} from "../model";
-import {today} from "../lib/const.ts";
+import {today} from "@/shared/const.ts";
 import {getCountryFlagPath} from "../lib/getCountryFlagPath.ts";
 import styles from './styles.module.scss';
 
@@ -44,7 +44,7 @@ const Table = () => {
   const date = dayjs(useAppSelector(currenciesSlice.selectors.selectDate));
   const dateString = date.diff(today, 'day') === 0 ? "сегодня" : date.format("L");
 
-  const {data, isLoading} = currenciesApi.useGetCurrenciesQuery(date.format('YYYY-MM-DD'));
+  const {data, isLoading} = currenciesApi.useGetCurrenciesByDateQuery(date.format('YYYY-MM-DD'));
 
   return (
     <div className={styles.Table_container}>

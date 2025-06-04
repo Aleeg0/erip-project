@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import styles from './styles.module.scss';
 import {useAppDispatch, useAppSelector} from "@/shared/redux";
 import {currenciesSlice} from "@/entities/Currencies/model";
-import {today} from "../lib/const.ts";
+import {today} from "@/shared/const.ts";
 import {DatePicker} from "@/components/widget";
 
 const InputBlock = () => {

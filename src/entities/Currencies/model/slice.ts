@@ -1,9 +1,9 @@
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
 import type {currencyState} from "./types.ts";
-import {today} from "../lib/const.ts";
+import {todayStr} from "@/shared/const.ts";
 
 const initialState: currencyState = {
-  date: today.format("YYYY-MM-DD"),
+  date: todayStr,
 };
 
 const currenciesSlice = createSlice({
