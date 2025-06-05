@@ -2,14 +2,30 @@
   margin-block: 40px;
 }
 
-.content {
+.container {
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-start;
+
+  &.onlyChild {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.content {
+  position: relative;
+  background: var(--color-widget-background);
+  border-radius: 10px;
+  box-shadow: 3px 2px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .currenciesTable {
   width: 75%;
+
+  &.onlyChild {
+    width: 40%;
+  }
 }
 
 .currenciesDateInput {
@@ -18,7 +34,7 @@
 }
 
 @media (max-width: 1024px) {
-  .content {
+  .container {
     flex-direction: column;
     align-items: center;
   }
@@ -30,5 +46,13 @@
   .currenciesDateInput {
     width: 100%;
     margin: 0 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .currenciesTable {
+    &.onlyChild {
+      width: 80%;
+    }
   }
 }
