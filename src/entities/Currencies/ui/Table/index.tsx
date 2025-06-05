@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import {useAppSelector} from "@/shared/redux";
 import {currenciesApi, currenciesSlice} from "../../model";
 import {today} from "@/shared/const.ts";
-import styles from '../InputBlock/styles.module.scss';
+import styles from './styles.module.scss';
 import Table from "./ui/Table.tsx";
 
 const TableBlock = () => {
