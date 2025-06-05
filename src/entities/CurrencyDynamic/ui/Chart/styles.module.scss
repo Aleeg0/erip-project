@@ -53,7 +53,7 @@
     }
   }
 
-  @media (max-height: 932px) {
+  @media (pointer: coarse) and (max-height: 932px) {
     &_content {
       aspect-ratio: 1;
     }

@@ -6,6 +6,8 @@ import CurrencySelector from "./ui/CurrencySelector.tsx";
 import {useConvertForm} from "@/components/features/Converter/lib/useConvertForm.ts";
 import {SwapOutlined} from "@ant-design/icons";
 import {useMemo} from "react";
+import {ShareButton} from "@/components/widget";
+import {formQueryParams} from "./lib/formQueryParams.ts";
 
 const BLRCurrencyByDate: CurrencyByDate = {
   id: 933,
@@ -38,6 +40,8 @@ const Converter = () => {
     currenciesA: currencies.filter((item) => item.id !== idB),
     currenciesB: currencies.filter((item) => item.id !== idA)
   }), [idA, idB, currencies]);
+
+  const params = formQueryParams(idA, idB, sumA);
 
 
   return (
@@ -88,6 +92,7 @@ const Converter = () => {
           />
         </div>
       </div>
+      <ShareButton params={params}/>
     </div>
   );
 };
