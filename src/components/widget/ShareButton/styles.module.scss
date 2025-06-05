@@ -1,0 +1,26 @@
+.ShareButton {
+  &_root {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 52px !important;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    border: 1px solid var(--color-background);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &_icon {
+    font-size: 10px;
+  }
+
+  @media (max-width: 1024px) {
+
+    &_root {
+      right: 20px;
+    }
+  }
+}
