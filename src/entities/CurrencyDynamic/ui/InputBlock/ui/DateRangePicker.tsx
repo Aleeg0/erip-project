@@ -1,6 +1,5 @@
 import {today} from "@/shared/const.ts";
 import {DatePicker, Grid} from "antd";
-import {disableEndDate, disableStartDate, disableYearDateRange} from "../lib/disableDates.ts";
 import dayjs, {type Dayjs} from "dayjs";
 import type {FC} from "react";
 import type {DateCouple} from "@/entities/CurrencyDynamic/model";
@@ -10,16 +9,16 @@ const {RangePicker} = DatePicker;
 const {useBreakpoint} = Grid;
 
 type Props = {
-  onChange: (dates: [Dayjs | null, Dayjs | null]) => void;
-  value?: DateCouple
+  onChange: (dates: [Dayjs, Dayjs]) => void;
+  value: DateCouple
 };
 
 const DateRangePicker: FC<Props> = ({
   onChange,
   value
 }) => {
-  const startDate = value ? dayjs(value.startDate) : null;
-  const endDate = value ? dayjs(value.endDate) : null;
+  const startDate = dayjs(value.startDate);
+  const endDate = dayjs(value.endDate);
 
   const screens = useBreakpoint();
   const isMobile = !screens.md;
@@ -29,21 +28,21 @@ const DateRangePicker: FC<Props> = ({
       <div className={styles.RangePicker_mobile}>
         <DatePicker
           value={startDate}
-          onChange={(val) => onChange([val, endDate ?? val])}
+          onChange={(val) => onChange([val, endDate])}
           maxDate={endDate || today}
-          disabledDate={disableStartDate(endDate)}
           placement={"bottomLeft"}
           placeholder={"Дата с"}
           format={"L"}
+          allowClear={false}
         />
         <DatePicker
           value={endDate}
-          onChange={(val) => onChange([startDate ?? val, val])}
+          onChange={(val) => onChange([startDate, val])}
           maxDate={today}
-          disabledDate={disableEndDate(startDate)}
           placement={"bottomRight"}
           placeholder={"Дата по"}
           format={"L"}
+          allowClear={false}
         />
       </div>
     );
@@ -52,12 +51,18 @@ const DateRangePicker: FC<Props> = ({
   return (
     <RangePicker
       value={[startDate, endDate]}
-      onChange={(dates) => onChange(dates || [null, null])}
+      onChange={(dates) => {
+        if (dates && dates[0] && dates[1]) {
+          onChange([dates[0], dates[1]]);
+        } else {
+          onChange([today, today]);
+        }
+      }}
       maxDate={today}
       placement={"bottomRight"}
       placeholder={['дата с', 'дата по']}
       format={"L"}
-      disabledDate={disableYearDateRange}
+      allowClear={false}
     />
   );
 };
