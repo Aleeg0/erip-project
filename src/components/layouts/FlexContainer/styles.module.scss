@@ -6,10 +6,19 @@
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-start;
+
+  &.onlyChild {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .currenciesTable {
   width: 75%;
+
+  &.onlyChild {
+    width: 40%;
+  }
 }
 
 .currenciesDateInput {
@@ -30,5 +39,13 @@
   .currenciesDateInput {
     width: 100%;
     margin: 0 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .currenciesTable {
+    &.onlyChild {
+      width: 80%;
+    }
   }
 }
