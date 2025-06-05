@@ -4,10 +4,12 @@ import styles from './styles.module.scss';
 
 const Layout = () => {
   return (
-    <div className={styles.container}>
-      <Header/>
-      <div className={styles.content}>
-        <Outlet/>
+    <div className={styles.root}>
+      <div className={styles.container}>
+        <Header/>
+        <div className={styles.content}>
+          <Outlet/>
+        </div>
       </div>
       <Footer/>
     </div>
