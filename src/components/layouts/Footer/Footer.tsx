@@ -1,10 +1,11 @@
 import styles from './styles.module.scss';
-import dayjs from "dayjs";
+import {year} from "@/shared/const.ts";
 import {socials} from "@/components/layouts/Footer/const.tsx";
 
 
 const Footer = () => {
-  const year = dayjs().year();
+  const {browser} = UAParser();
+
 
   return (
     <footer className={styles.container}>
