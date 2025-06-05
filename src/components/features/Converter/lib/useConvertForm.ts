@@ -1,17 +1,16 @@
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import type {CurrencyByDate} from "@/entities/Currencies/model";
 import {transformToMap} from "@/components/features/Converter/lib/transformToMap.ts";
+import {useNavigate, useSearchParams} from "react-router";
 
-type ConvertForm = {
+export type ConvertForm = {
   idA: number,
   sumA: string,
   idB: number,
   sumB: string,
 };
 
-
-
-const initState: ConvertForm = {
+const defaultState: ConvertForm = {
   idA: 933,
   sumA: (0).toFixed(4),
   idB: 431,
@@ -19,46 +18,76 @@ const initState: ConvertForm = {
 };
 
 export const useConvertForm = (data: CurrencyByDate[]) => {
-  const [form, setForm] = useState<ConvertForm>({
-    ...initState
-  });
-
   // utils
   const map = useMemo(() => transformToMap(data),[data]);
   const convert = useCallback((value: number, idA: number, idB: number): number => {
-    const {rate: rateA, scale: scaleA} = map[idA];
-    const {rate: rateB, scale: scaleB} = map[idB];
-    return Number(value) * rateA * scaleB / (scaleA * rateB);
+    if (map[idA] && map[idB]){
+      const {rate: rateA, scale: scaleA} = map[idA];
+      const {rate: rateB, scale: scaleB} = map[idB];
+      return Number(value) * rateA * scaleB / (scaleA * rateB);
+    }
+    return 0;
   },[map]);
+  
+  
+  // url
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState<ConvertForm>();
+
+  useEffect(() => {
+    const idA = Number(searchParams.get("idA"));
+    const idB = Number(searchParams.get("idB"));
+    const sumA = Number(searchParams.get("sumA"));
+
+    if (idA && idB && sumA && map[idA] && map[idB]) {
+      const sumB = convert(Number(sumA), idA, idB);
+      
+      setSearchValue({
+        idA,
+        idB,
+        sumA: sumA.toFixed(4),
+        sumB: sumB.toFixed(4)
+      });
+      navigate('/converter', {replace: true});
+    }
+  }, [convert, map, navigate, searchParams]);
+
+  const [userForm, setUserForm] = useState<ConvertForm>();
+  const formData = {
+    ...defaultState,
+    ...searchValue,
+    ...userForm
+  };
 
   // sums
   const onChangeSumA = (value: string) => {
     const sumA = numericValidator(value);
-    const sumB = convert(Number(sumA), form.idA, form.idB).toFixed(4);
+    const sumB = convert(Number(sumA), formData.idA, formData.idB).toFixed(4);
 
-    setForm(f => ({
-      ...f,
+    setUserForm({
+      ...formData,
       sumA,
       sumB
-    }));
+    });
   };
 
   const onChangeSumB = (value: string) => {
     const sumB = numericValidator(value);
-    const sumA = convert(Number(sumB), form.idB, form.idA).toFixed(4);
+    const sumA = convert(Number(sumB), formData.idB, formData.idA).toFixed(4);
 
-    setForm(f => ({
-      ...f,
+    setUserForm({
+      ...formData,
       sumA,
       sumB
-    }));
+    });
   };
 
   // ids
   const onChangeId = (key: 'idA' | 'idB') => (value: number)=> {
-    setForm(f => {
+    setUserForm(() => {
       const newState: ConvertForm = {
-        ...f,
+        ...formData,
         [key]: value,
       };
 
@@ -70,11 +99,11 @@ export const useConvertForm = (data: CurrencyByDate[]) => {
   };
 
   const onSwapIds = () => {
-    setForm(f => {
+    setUserForm(() => {
       const newState: ConvertForm = {
-        ...f,
-        idA: f.idB,
-        idB: f.idA
+        ...formData,
+        idA: formData.idB,
+        idB: formData.idA
       };
 
       const sumA = newState.sumA;
@@ -85,7 +114,7 @@ export const useConvertForm = (data: CurrencyByDate[]) => {
   };
 
   return {
-    form,
+    form: formData,
     onChangeIdA: onChangeId('idA'),
     onChangeIdB: onChangeId('idB'),
     onChangeSumA,
