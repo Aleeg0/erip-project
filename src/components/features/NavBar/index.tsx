@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {routeMap} from "@/shared/router";
-import NavList from "./NavList.tsx";
-import NavDropdown from "./NavDropdown.tsx";
+import NavList from "./ui/NavList.tsx";
+import NavDropdown from "./ui/NavDropdown.tsx";
 import styles from './styles.module.scss';
 
 const routesItems = Object.values(routeMap);

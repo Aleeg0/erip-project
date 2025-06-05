@@ -1,2 +1,2 @@
-export {default as NavBar} from './NavBar/ui/NavBar.tsx';
+export {default as NavBar} from './NavBar';
 export {default as Converter} from './Converter';

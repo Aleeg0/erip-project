@@ -1,6 +1,6 @@
 import {NavLink, useLocation} from "react-router";
 import type {FC} from "react";
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 import {cn} from "@/shared/utils";
 import type {NavProps} from "../lib/type.ts";
 
