@@ -11,13 +11,13 @@ const FlexContainer: FC<Props> = ({mainComponent, sideComponent}) => {
   return (
     <main className={styles.root}>
       <div className={cn(
-        styles.content,
+        styles.container,
         !sideComponent && styles.onlyChild
       )}>
         {sideComponent &&
           <div className={cn(
             styles.currenciesDateInput,
-            "UiContainer",
+            styles.content,
           )}>
             {sideComponent}
           </div>
@@ -25,7 +25,7 @@ const FlexContainer: FC<Props> = ({mainComponent, sideComponent}) => {
         <div className={cn(
           styles.currenciesTable,
           !sideComponent && styles.onlyChild,
-          "UiContainer",
+          styles.content,
         )}>
           {mainComponent}
         </div>
