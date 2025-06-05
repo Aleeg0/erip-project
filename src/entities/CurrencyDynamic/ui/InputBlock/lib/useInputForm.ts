@@ -1,55 +1,73 @@
-import {useState} from "react";
-import type {Dayjs} from "dayjs";
+import {useEffect, useState} from "react";
+import dayjs, {type Dayjs} from "dayjs";
 import {
-  type Currency, selectFilters, type DateCouple, type Code, setFilters
+  type Currency, selectFilters, setFilters, type CurrencyDynamicFilters
 } from "@/entities/CurrencyDynamic/model";
 import {useAppDispatch, useAppSelector} from "@/shared/redux";
-
-
-type FiltersForm = {
-  date: DateCouple;
-  parentID: Code;
-}
+import {useNavigate, useSearchParams} from "react-router";
 
 export const useInputForm = () => {
+  // redux store
   const dispatch = useAppDispatch();
-  const reduxState = useAppSelector(selectFilters);
-  const [form, setForm] = useState<Partial<FiltersForm>>({
-    ...reduxState
-  });
+  const reduxValue = useAppSelector(selectFilters);
 
-  const updateDates = ([start, end]: [Dayjs | null, Dayjs | null]) => {
-    console.log(start, end);
-    setForm(f => ({
-      ...f,
-      date: start && end
-        ? {
-          startDate: start.format('YYYY-MM-DD'),
-          endDate: end.format('YYYY-MM-DD')
-        }
-        : undefined
-    }));
+  // url query
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  // ?date=2025-03-02
+  useEffect(() => {
+    const startDate = dayjs(searchParams.get("startDate"));
+    const endDate = dayjs(searchParams.get("endDate"));
+    const parentID = searchParams.get("parentID");
+
+    if (startDate.isValid() && endDate.isValid() && parentID) {
+      dispatch(setFilters({
+        date: {
+          startDate: startDate.format('YYYY-MM-DD'),
+          endDate: endDate.format('YYYY-MM-DD'),
+        },
+        parentID
+      }));
+      navigate('/currency-dynamic', {replace: true});
+    }
+  }, [dispatch, navigate, searchParams]);
+
+  const [userValue, setUserValue] = useState<Partial<CurrencyDynamicFilters>>();
+
+  const formValue = {
+    ...reduxValue,
+    ...userValue,
+  };
+
+  const updateDates = ([start, end]: [Dayjs, Dayjs]) => {
+    setUserValue({
+      ...formValue,
+      date: {
+        startDate: start.format('YYYY-MM-DD'),
+        endDate: end.format('YYYY-MM-DD')
+      }
+    });
   };
 
   const updateCurrency = (value: string) => {
-    setForm(f => ({
-      ...f,
+    setUserValue(formValue => ({
+      ...formValue,
       parentID: value,
     }));
   };
 
   const onSubmit = (currencyList: Currency[] | undefined) => {
-    const {date, parentID} = form;
+    const {date, parentID} = formValue;
 
-    if (!currencyList || !date || !date.startDate || !date.endDate || !parentID) return;
+    if (!currencyList) return;
 
     dispatch(setFilters({date, parentID}));
   };
 
-  const isFulfilled = !!(form.parentID && form.date?.startDate);
+  const isFulfilled = !!(formValue.parentID && formValue.date?.startDate);
 
   return {
-    form,
+    form: formValue,
     isFulfilled,
     updateDates,
     updateCurrency,
