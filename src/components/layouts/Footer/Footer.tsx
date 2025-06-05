@@ -1,10 +1,12 @@
 import styles from './styles.module.scss';
-import dayjs from "dayjs";
+import {year} from "@/shared/const.ts";
 import {socials} from "@/components/layouts/Footer/const.tsx";
+import {UAParser} from "ua-parser-js";
 
 
 const Footer = () => {
-  const year = dayjs().year();
+  const {browser} = UAParser();
+
 
   return (
     <footer className={styles.container}>
@@ -21,9 +23,10 @@ const Footer = () => {
           ))}
         </div>
         <div className={styles.rightPart}>
-          <p>
+          <span>
             {year}, ОАО «НКФО «ЕРИП»
-          </p>
+          </span>
+          <span>Текущий браузр: {browser.name} {browser.version}</span>
         </div>
       </div>
     </footer>
