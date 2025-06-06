@@ -1,5 +1,5 @@
 import {Converter} from "@/components/features";
-import FlexContainer from "../../components/layouts/FlexContainer/FlexContainer.tsx";
+import {FlexContainer} from "@/components/layouts";
 
 const ConverterPage = () => {
   return (
