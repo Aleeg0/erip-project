@@ -1,0 +1,19 @@
+@use 'reset';
+@use 'variables';
+@use 'antd';
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (pointer: coarse) and (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+html {
+  font-family: "Open Sans", Arial, sans-serif;
+}
