@@ -22,7 +22,7 @@ Follow these steps to install and run the project locally:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/erip-project.git
+git clone https://github.com/Aleeg0/erip-project.git
 cd erip-project
 ```
 
